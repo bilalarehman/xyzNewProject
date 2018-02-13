@@ -38,7 +38,7 @@ class Options extends CI_Controller {
 		{
 			extract($_POST);
 			$info['ALLOW_GROUP'] = implode(',', $allow);
-			$this->main_db->update_single('inf_sub_menu', 'SMENUID', $id, $info);
+			$this->main_db->update('inf_sub_menu', 'SMENUID', $id, $info);
 			$this->session->set_flashdata('success', "Record Updated Successfully!");
 			
 		}
@@ -46,7 +46,7 @@ class Options extends CI_Controller {
 		{
 			extract($_POST);
 			$info['ALLOW_GROUP'] = implode(',', $allow);
-			$this->main_db->update_single('inf_main_menu', 'PMENUID', $id, $info);
+			$this->main_db->update('inf_main_menu', 'PMENUID', $id, $info);
 			$this->session->set_flashdata('success', "Record Updated Successfully!");
 			
 		}		
@@ -68,7 +68,7 @@ class Options extends CI_Controller {
 		{
 			extract($_POST);
 			$info['ALLOW_GROUP'] = implode(',', $allow);
-			$this->main_db->add_single('inf_main_menu', $info);
+			$this->main_db->add('inf_main_menu', $info);
 			$this->session->set_flashdata('success', "Record Deleted Successfully!");
 			
 		}	
@@ -76,9 +76,8 @@ class Options extends CI_Controller {
 		{
 			extract($_POST);
 			$info['ALLOW_GROUP'] = implode(',', $allow);
-			$this->main_db->add_single('inf_sub_menu', $info);
+			$this->main_db->add('inf_sub_menu', $info);
 			$this->session->set_flashdata('success', "Record Deleted Successfully!");
-			
 		}			
 
 

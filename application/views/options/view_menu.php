@@ -24,7 +24,7 @@
 
               </h3>
 
-              <?php $info_sub_menu = $this->main_db->view_single('inf_sub_menu', 'PMENUID', $value1->PMENUID); 
+              <?php $info_sub_menu = $this->main_db->view('*', 'inf_sub_menu', ['PMENUID'=>$value1->PMENUID]); 
 
               if (!empty($info_sub_menu)) { ?>
               <table class="table table-bordered table-striped table-condensed table-hover">

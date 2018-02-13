@@ -22,10 +22,9 @@ class User extends CI_Controller {
 	public function index()
 	{ 		
 		// Code for PageTitle		
-		$data['page_main_title'] = "USER";
+		$data['title'] = "USER";
 		
 		$data['info_groups'] = $this->main_db->view_name('aauth_groups', 'id', 'name');
-		//$data['info_classes'] = $this->main_db->view_name('inf_classes', 'CLID', 'CLNAME');
 		$data['info_users'] = $this->aauth->list_users(FALSE, FALSE, FALSE, TRUE);
 		$data['info_grp'] = $this->aauth->list_groups();
 		$data['info_per'] = $this->aauth->list_perms();
@@ -33,25 +32,20 @@ class User extends CI_Controller {
 		$this->template->load('user/view_user', $data);
 	}		
 
-	function update_pass()
-	{
-		for ($i=9056; $i <= 9102; $i++) 
-		{ 
-			echo $this->aauth->update_user($i, '', '12345');
-			echo "<br>"; 
-		}
-	}
-
 	function ban_user()
 	{
 		extract($_POST);
 		$this->aauth->ban_user($user_id);
+		$this->session->set_flashdata('success', 'User Banned Successfully!');
+		redirect('user'); 			
 	}
 
 	function unban_user()
 	{
 		extract($_POST);
 		$this->aauth->unban_user($user_id);
+		$this->session->set_flashdata('success', 'User UnBanned Successfully!');
+		redirect('user'); 			
 	
 	}	
 
@@ -60,7 +54,7 @@ class User extends CI_Controller {
 		extract($_POST);
 		$this->aauth->create_user($email, $pass, $name);
 		$this->session->set_flashdata('success', 'User Added Successfully!');
-		redirect('user'); 	 	
+		redirect('user/index#user'); 	 	
 	
 	}
 
@@ -69,7 +63,7 @@ class User extends CI_Controller {
 		extract($_POST);
 		$this->aauth->update_user($user_id, $email, $pass, $name);
 		$this->session->set_flashdata('success', 'User Updated Successfully!');
-		redirect('user'); 	 		
+		redirect('user/index#user'); 	 		
 	}
 
 	function delete_user()
@@ -77,7 +71,7 @@ class User extends CI_Controller {
 		extract($_POST);
 		$this->aauth->delete_user($id);
 		$this->session->set_flashdata('success', 'User Deleted Successfully!');
-		redirect('user'); 	 	
+		redirect('user/index#user'); 	 	
 	}
 
 	function add_grp()
@@ -85,7 +79,7 @@ class User extends CI_Controller {
 		extract($_POST);
 		$this->aauth->create_group($grp_name, $grp_def);
 		$this->session->set_flashdata('success', 'Group Added Successfully!');
-		redirect('user'); 	
+		redirect('user/index#group'); 	
 	
 	}	
 
@@ -94,14 +88,15 @@ class User extends CI_Controller {
 		extract($_POST);
 		$this->aauth->update_group($grp_id, $grp_name, $grp_def);
 	    $this->session->set_flashdata('success', 'Group Updated Successfully!');
-		redirect('user'); 	
+		redirect('user/index#group'); 	
 	}	
 
 	function del_group()
 	{
 		extract($_POST);
-		$this->aauth->delete_group($grp_id);
-	
+		$this->aauth->delete_group($id);
+	    $this->session->set_flashdata('success', 'Group Deleted Successfully!');
+		redirect('user/index#group'); 		
 	}	
 
 	function add_permission()
@@ -109,21 +104,25 @@ class User extends CI_Controller {
 		extract($_POST);
 		$this->aauth->create_perm($name, $definition);
 		$this->session->set_flashdata('success', 'Permission Added Successfully!');
-		redirect('user'); 
+		redirect('user/index#permission'); 
 	
 	}	
 
 	function update_per()
 	{
 		extract($_POST);
-		$this->aauth->update_perm($per_id, $per_name, $per_def);
-	
+		$this->aauth->update_perm($id, $per_name, $per_def);
+		$this->session->set_flashdata('success', 'Permission Updated Successfully!');
+		redirect('user/index#permission'); 
+		
 	}
 
 	function del_permission()
 	{
 		extract($_POST);
-		$this->aauth->delete_perm($per_id);
+		$this->aauth->delete_perm($id);
+		$this->session->set_flashdata('success', 'Permission Deleted Successfully!');
+		redirect('user/index#permission'); 
 	
 	}
 
