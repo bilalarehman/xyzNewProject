@@ -81,14 +81,16 @@ $link = $first .'/'.$second; ?>
   <!-- Content Wrapper. Contains page content -->
 <div class="content-wrapper">
 <!-- Content Header (Page header) -->
-<section class="content-header">
 
+  <section class="content-header">
+    <h1>
+      <?php echo (isset($title)) ? $title : ''; ?>
+      <small><?php echo (isset($subtitle)) ? $subtitle : ''; ?></small>
 
-    <a href="../" class="btn btn-primary">BACK</a>
+      <a onclick="window.history.back()" class="btn btn-primary">BACK</a>
 
-  </small>
-  </h1>
-</section>
+    </h1>
+  </section>
 
 <!-- Main content -->
 <section class="content">
