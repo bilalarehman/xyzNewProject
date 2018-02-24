@@ -39,4 +39,10 @@ class Category extends CI_Controller {
 		$this->template->load('category/index', $data);
 
 	}
+
+	function fetch()
+	{
+		$data = $this->main_db->category_tree('nodes');
+		echo json_encode($data);
+	}
 }

@@ -512,6 +512,40 @@ class Main_db extends CI_Model
 
 	}
 
+	function category_tree($plugin=null)
+	{
+		$data1 = $this->view('*', 'inf_category', ['allow'=>'Y']);
+
+		foreach ($data1 as $key => $row) {
+			$sub_data["id"] = $row->id;
+			$sub_data["name"] = $row->name;
+			$sub_data["text"] = $row->name;
+			$sub_data["parent_id"] = $row->parent_id;
+			$data[] = $sub_data;
+		}
+
+		foreach($data as $key => &$value)
+		{
+		 $output[$value["id"]] = &$value;
+		}
+		foreach($data as $key => &$value)
+		{
+		 if($value["parent_id"] && isset($output[$value["parent_id"]]))
+		 {
+		  $output[$value["parent_id"]][$plugin][] = &$value;
+		 }
+		}
+		foreach($data as $key => &$value)
+		{
+		 if($value["parent_id"] && isset($output[$value["parent_id"]]))
+		 {
+		  unset($data[$key]);
+		 }
+		}
+
+		return $data;
+	}	
+
 }
 
 
