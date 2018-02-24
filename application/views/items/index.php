@@ -5,7 +5,7 @@
 		<!-- Trigger the modal with a button -->
 		<button type="button" class="btn btn-info pull-right" data-toggle="modal" data-target="#addItem"><i class="fa fa-plus"></i> Add</button>
 
-
+Bilal 
 		<?php if (isset($infoItems[0])) { ?>
 		
 		<!-- table class="table table-bordered table-striped table-condensed table-all">
